@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Plans - Lectorio</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS File -->
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- App Layout -->
+    <div class="min-h-screen flex">
+
+        <!-- Sidebar Start -->
+        <div id="sidebarContainer"></div>
+        <!-- Sidebar End -->
+
+
+        <!-- Main Area Start -->
+  <main class="flex-1">
+
+            <div class="p-8">
+
+                <!-- Header -->
+                <div class="flex items-start justify-between mb-8">
+
+                    <div>
+                        <h2
+                          id="planTitle"
+                          class="text-4xl font-bold text-slate-900">
+                           Loading Plan...
+                           </h2>
+
+                        <p
+                             id="planInfo"
+                             class="mt-1 text-slate-500">
+                             Loading...
+                          </p>
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <button class="bg-white border border-slate-300 px-5 py-3 rounded-xl text-sm font-semibold hover:bg-slate-100 transition">
+                            ✎ Edit Parameters
+                        </button>
+
+                        <a href="timer.html"
+                            class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-sm font-semibold transition">
+                            ▶ Start First Session
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Page Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                  <!-- Left Main Plan Area -->
+<div
+    id="generatedPlanContainer"
+    class="lg:col-span-2 space-y-5">
+</div>
+
+
+                    <!-- Right Sidebar Cards -->
+                    <div class="space-y-6">
+
+                        <!-- Weekly Progress -->
+                        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                            <h3 class="text-lg font-bold text-slate-900">
+                                Weekly Progress
+                            </h3>
+
+                            <div class="mt-5">
+
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-slate-500">Course Coverage</span>
+                                    <span
+    id="courseCoverageText"
+    class="font-bold text-indigo-600">
+    0%
+</span>
+                                </div>
+
+                                <div class="h-2 bg-slate-200 rounded-full">
+                                    <div
+    id="courseCoverageBar"
+    class="h-2 bg-indigo-500 rounded-full"
+    style="width:0%">
+</div>
+                                </div>
+
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mt-6">
+
+                                <div class="bg-slate-50 rounded-xl p-4">
+                                    <p class="text-xs text-slate-500">
+                                        Sessions
+                                    </p>
+                                    <h4
+    id="sessionCount"
+    class="text-2xl font-bold mt-1">
+    0 / 0
+</h4>
+                                </div>
+
+                                <div class="bg-slate-50 rounded-xl p-4">
+                                    <p class="text-xs text-slate-500">
+                                        Focus Hours
+                                    </p>
+                                    <h4
+    id="focusHours"
+    class="text-2xl font-bold mt-1">
+    0h
+</h4>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Upcoming Milestones -->
+                        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                            <h3 class="text-lg font-bold text-slate-900 mb-5">
+                                Upcoming Milestones
+                            </h3>
+
+                            <div class="space-y-5">
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+
+                                        <div class="w-10 h-10 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center">
+                                            🏆
+                                        </div>
+
+                                        <div>
+                                            <h4 class="text-sm font-semibold">
+                                                Mid-term Mock Exam
+                                            </h4>
+                                            <p class="text-xs text-slate-500">
+                                                Oct 16 · 2:00 PM
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                    <span class="text-slate-400">›</span>
+                                </div>
+
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+
+                                        <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center">
+                                            📘
+                                        </div>
+
+                                        <div>
+                                            <h4 class="text-sm font-semibold">
+                                                Genetics Quiz
+                                            </h4>
+                                            <p class="text-xs text-slate-500">
+                                                Oct 15 · 10:00 AM
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                    <span class="text-slate-400">›</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Tip Card -->
+                        <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-sm min-h-52 flex flex-col justify-end">
+
+                            <p class="text-xs font-bold uppercase text-indigo-200">
+                                Pro Tip
+                            </p>
+
+                            <h3 class="text-xl font-bold mt-2">
+                                Switch to Active Recall mode during review blocks.
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Footer -->
+            <footer class="bg-white border-t border-slate-200 px-8 py-6 mt-10">
+
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">
+                            Lectorio
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            © 2024 Lectorio. Engineered for deep focus.
+                        </p>
+                    </div>
+
+                    <div class="flex gap-6 text-sm text-slate-600">
+                        <a href="#" class="hover:text-indigo-500">Privacy Policy</a>
+                        <a href="#" class="hover:text-indigo-500">Terms</a>
+                        <a href="#" class="hover:text-indigo-500">Support</a>
+                    </div>
+
+                </div>
+
+            </footer>
+
+        </main>
+        <!-- Main Area End -->
+
+    </div>
+<script src="lectorio.js"></script>
+<script src="plan-detail-ai.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+</body>
+
+</html>

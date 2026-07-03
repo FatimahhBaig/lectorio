@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer - Lectorio</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS File -->
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- App Layout -->
+    <div class="min-h-screen flex">
+
+        <!-- Sidebar Start -->
+        <div id="sidebarContainer"></div>
+        <!-- Sidebar End -->
+
+
+        <!-- Main Timer Area Start -->
+        <main class="flex-1 min-h-screen relative overflow-hidden">
+
+            <!-- Top Header -->
+            <div class="p-8 flex items-start justify-between">
+
+                <!-- Topic Info -->
+                <div>
+
+                    <p class="text-xs font-bold tracking-widest text-indigo-500 uppercase">
+                        Deep Focus Mode
+                    </p>
+
+                    <h2 class="mt-1 text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span class="text-indigo-500">♥</span>
+                        <span id="timerCurrentTopic">Current Topic</span>
+                    </h2>
+
+                </div>
+
+                <!-- Session Progress -->
+                <div class="flex items-center gap-4">
+
+                    <div class="text-right">
+                        <p class="text-xs text-slate-500">
+                            Session Progress
+                        </p>
+
+                        <p class="text-sm font-bold text-slate-900">
+                            Pomodoro 2 / 4
+                        </p>
+                    </div>
+
+                    <button class="w-12 h-12 bg-white border border-slate-300 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-100">
+                        ⋮
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Timer Content -->
+            <section class="flex flex-col items-center justify-center px-6 pt-8">
+
+                <!-- Set Timer Box -->
+                <div class="bg-white border border-slate-200 rounded-2xl px-5 py-4 shadow-sm mb-10 flex items-center gap-4">
+
+                    <label for="customMinutes" class="text-sm font-semibold text-slate-700">
+                        Set Timer
+                    </label>
+
+                    <input 
+                        id="customMinutes"
+                        type="number"
+                        min="1"
+                        value="15"
+                        class="w-20 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+
+                    <span class="text-sm text-slate-500">
+                        minutes
+                    </span>
+
+                    <button 
+                        id="setTimerBtn"
+                        class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                        Set
+                    </button>
+
+                </div>
+
+
+                <!-- Big Timer Circle -->
+                <div class="relative w-96 h-96">
+
+                    <svg class="w-96 h-96 transform -rotate-90" viewBox="0 0 300 300">
+
+                        <!-- Background Circle -->
+                        <circle
+                            cx="150"
+                            cy="150"
+                            r="125"
+                            stroke="#E5E7EB"
+                            stroke-width="8"
+                            fill="none"
+                        />
+
+                        <!-- Progress Circle -->
+                        <circle
+                            id="mainTimerProgress"
+                            cx="150"
+                            cy="150"
+                            r="125"
+                            stroke="#4F46E5"
+                            stroke-width="8"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-dasharray="785"
+                            stroke-dashoffset="190"
+                        />
+
+                    </svg>
+
+                    <!-- Timer Text -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+
+                        <h1 id="mainTimerText" class="text-7xl font-medium text-slate-900">
+                            15:00
+                        </h1>
+
+                        <p class="mt-4 text-xs font-bold tracking-widest text-slate-600 uppercase">
+                            Minutes Remaining
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Focus Progress -->
+                <div class="mt-8 w-full max-w-md">
+
+                    <div class="flex items-center justify-between text-sm mb-2">
+                        <span class="text-slate-700">
+                            Focus Progress
+                        </span>
+
+                        <span id="focusPercent" class="text-indigo-500 font-semibold">
+                            0% Complete
+                        </span>
+                    </div>
+
+                    <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div id="focusProgressBar" class="h-full bg-indigo-500 rounded-full w-0"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- Timer Buttons -->
+                <div class="mt-8 flex items-center gap-6">
+
+                    <button 
+                        id="skipBtn"
+                        class="w-12 h-12 bg-white border border-slate-300 rounded-full flex items-center justify-center text-slate-700 hover:bg-slate-100">
+                        ⏭
+                    </button>
+
+                    <button 
+                        id="startPauseBtn"
+                        class="w-20 h-20 bg-indigo-500 hover:bg-indigo-600 text-white rounded-3xl flex items-center justify-center text-3xl shadow-lg shadow-indigo-200">
+                        ▶
+                    </button>
+
+                    <button 
+                        id="resetBtn"
+                        class="w-12 h-12 bg-white border border-slate-300 rounded-full flex items-center justify-center text-slate-700 hover:bg-slate-100">
+                        ↻
+                    </button>
+
+                </div>
+
+
+                <!-- Quote Box -->
+                <div class="mt-16 bg-white border border-slate-200 rounded-full px-12 py-5 shadow-sm max-w-xl text-center">
+
+                    <p class="text-sm italic text-slate-600">
+                        “Concentration is the root of all the higher abilities in man.”
+                    </p>
+
+                    <p class="text-xs text-slate-500 mt-1">
+                        Bruce Lee
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+        <!-- Main Timer Area End -->
+
+    </div>
+
+    <!-- JavaScript file will be connected later -->
+    <script src="lectorio.js"></script>
+    <script src="timer-topic.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+</body>
+
+</html>

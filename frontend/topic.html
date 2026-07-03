@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic - Lectorio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+  <div class="min-h-screen flex">
+
+    <!-- Reusable Sidebar -->
+    <div id="sidebarContainer"></div>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+
+      <!-- Header -->
+      <div class="mb-6">
+        <a href="session.html" class="text-sm text-indigo-600 font-medium">
+          ← Back to Session
+        </a>
+
+        <div class="flex items-center gap-3 mt-3">
+          <h1 id="topicTitle" class="text-3xl font-bold">Loading Topic...</h1>
+          <span class="bg-indigo-100 text-indigo-600 text-xs px-3 py-1 rounded-full font-semibold">
+            In Progress
+          </span>
+        </div>
+
+        <p id="topicMeta" class="text-sm text-slate-500 mt-1">
+          Day 1 • Topic 2 of 3
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+        <!-- Left Main Area -->
+        <div class="xl:col-span-2 space-y-6">
+
+          <!-- Explanation -->
+<section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-bold">Easy Explanation</h2>
+
+    <span class="text-xs bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full font-semibold">
+      AI Simplified
+    </span>
+  </div>
+
+  <p
+    id="easyExplanation"
+    class="text-slate-600 leading-8 whitespace-pre-line"
+  >
+    AI explanation will appear here...
+  </p>
+
+</section>
+
+          <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-xl font-bold mb-5">Small Sections</h2>
+            <div id="topicSections" class="space-y-5">
+              <p class="text-slate-500">AI sections will appear here...</p>
+            </div>
+          </section>
+
+          <!-- Key Points -->
+<section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+  <h2 class="text-xl font-bold mb-5">Key Points</h2>
+
+  <div id="keyPointsContainer" class="space-y-4">
+    <p class="text-slate-500">AI key points will appear here...</p>
+  </div>
+</section>
+
+<!-- Examples -->
+<section class="bg-orange-100 border border-orange-200 rounded-2xl p-6">
+  <h2 class="text-lg font-bold mb-2">Examples</h2>
+
+  <div id="examplesContainer" class="text-orange-900 leading-7 space-y-3">
+    <p>AI examples will appear here...</p>
+  </div>
+</section>
+
+<!-- Quiz -->
+<section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+  <div class="flex items-center justify-between mb-5">
+    <h2 class="text-xl font-bold">Quick Check Quiz</h2>
+    <span class="text-xs text-slate-500">5 Questions</span>
+  </div>
+
+  <div id="quizContainer" class="space-y-5">
+    <p class="text-slate-500">AI quiz will appear here...</p>
+  </div>
+
+  <button
+    id="submitQuizBtn"
+    class="w-full mt-5 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition"
+  >
+    Submit Quiz
+  </button>
+</section>
+
+          <!-- Summary -->
+          <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-xl font-bold mb-4">Write Your Summary</h2>
+
+            <textarea
+              class="w-full h-40 bg-slate-100 border border-slate-200 rounded-xl p-4 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Reflect on what you learned..."
+            ></textarea>
+
+            <div class="flex justify-end mt-4">
+              <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition">
+                Save Summary
+              </button>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Right Panel -->
+        <aside class="space-y-6">
+
+          <!-- Topic Progress -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+            <div class="flex justify-between mb-2">
+              <h3 class="font-bold">Topic Progress</h3>
+              <span class="text-indigo-600 font-semibold">45%</span>
+            </div>
+
+            <div class="w-full bg-slate-200 rounded-full h-2">
+              <div class="bg-indigo-600 h-2 rounded-full w-[45%]"></div>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+            <div class="flex justify-between">
+              <span class="text-slate-500">Quiz Status</span>
+              <span class="font-semibold text-indigo-600">Unsubmitted</span>
+            </div>
+
+            <div class="flex justify-between">
+              <span class="text-slate-500">Time Spent</span>
+              <span class="font-semibold">0m 30s</span>
+            </div>
+
+            <button id="topicFocusTimerBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition">
+              Start Focus Timer
+            </button>
+
+            <button id="nextTopicBtn" class="w-full border border-slate-200 hover:bg-slate-50 py-3 rounded-xl font-semibold transition">
+              Next Topic →
+            </button>
+          </div>
+
+          <!-- Visual Card -->
+          <div class="bg-slate-900 text-white rounded-2xl p-5 min-h-40 flex flex-col justify-end shadow-sm">
+            <p class="text-xs text-indigo-300 mb-2">Deep Dive</p>
+            <h3 class="text-xl font-bold">Explore this topic with AI support.</h3>
+          </div>
+
+        </aside>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="topic.js"></script>
+</body>
+</html>

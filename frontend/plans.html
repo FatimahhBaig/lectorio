@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Plans - Lectorio</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <div id="sidebarContainer"></div>
+
+    <!-- Main -->
+    <main class="flex-1">
+
+        <div class="p-8">
+
+            <!-- Header -->
+            <div class="flex items-start justify-between mb-8">
+                <div>
+                    <h2 class="text-4xl font-bold text-slate-900">
+                        My Plans
+                    </h2>
+
+                    <p class="mt-2 text-slate-500">
+                        Choose a subject plan to view your day-by-day study schedule.
+                    </p>
+                </div>
+
+                <a href="new-plan.html"
+                   class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-sm font-semibold">
+                    ＋ New Plan
+                </a>
+            </div>
+
+            <!-- Plans List -->
+            <div id="plansListContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                <!-- JS will load plan cards here -->
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-slate-200 px-8 py-6 mt-10">
+            <div class="flex justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">
+                        Lectorio
+                    </h3>
+
+                    <p class="mt-1 text-sm text-slate-500">
+                        © 2024 Lectorio. Engineered for deep focus.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="lectorio.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+</body>
+</html>

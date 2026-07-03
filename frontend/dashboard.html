@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lectorio Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+   <div id="sidebarContainer"></div>
+
+    <!-- Main -->
+    <main class="flex-1 p-8">
+
+        <!-- NEW USER DASHBOARD -->
+        <section id="newUserDashboard" class="hidden">
+
+            <div class="bg-white border border-slate-200 rounded-3xl p-10 shadow-sm">
+
+                <div class="max-w-3xl">
+                    <p class="text-sm font-semibold text-indigo-600 uppercase">
+                        Welcome to Lectorio
+                    </p>
+
+                    <h2 class="text-5xl font-bold text-slate-900 mt-4">
+                        Build your first smart study plan.
+                    </h2>
+
+                    <p class="text-slate-500 mt-4 text-lg">
+                        Upload your lecture file or paste your notes. Lectorio will help you split your study material into daily focus sessions.
+                    </p>
+
+                    <a href="new-plan.html" class="inline-block mt-8 bg-indigo-500 hover:bg-indigo-600 text-white px-7 py-4 rounded-xl font-bold">
+                        ＋ Create My First Plan
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-2xl">
+                        📄
+                    </div>
+                    <h3 class="font-bold text-lg mt-5">Upload Lectures</h3>
+                    <p class="text-slate-500 text-sm mt-2">
+                        Add PDF, DOCX, or pasted notes.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-2xl">
+                        🧠
+                    </div>
+                    <h3 class="font-bold text-lg mt-5">Smart Planning</h3>
+                    <p class="text-slate-500 text-sm mt-2">
+                        Break topics into daily study goals.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-2xl">
+                        ⏱
+                    </div>
+                    <h3 class="font-bold text-lg mt-5">Focus Timer</h3>
+                    <p class="text-slate-500 text-sm mt-2">
+                        Study with breaks and reminders.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RETURNING USER DASHBOARD -->
+        <section id="returningUserDashboard" class="hidden">
+
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900">
+                        Welcome back, Fatima.
+                    </h2>
+
+                    <p class="text-slate-500 mt-1">
+                        Ready for your deep focus session?
+                    </p>
+                </div>
+
+                <a href="timer.html" class="border border-slate-300 bg-white px-5 py-3 rounded-xl text-sm font-medium hover:bg-slate-100">
+                    ▶ Quick Start Timer
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <div class="lg:col-span-2 space-y-6">
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold">
+                                Active Study Plans
+                            </h3>
+
+                            <a href="plans.html" class="text-sm text-indigo-500 font-medium">
+                                View All
+                            </a>
+                        </div>
+
+                        <div id="dashboardPlansList" class="space-y-5">
+                            <!-- JS will add plans here -->
+                        </div>
+
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                        <h3 class="text-lg font-bold mb-6">
+                            Today's Sessions
+                        </h3>
+
+                        <div id="todaySessionsList" class="space-y-5">
+                            <!-- JS will add sessions here -->
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="space-y-6">
+
+                    <div class="bg-indigo-500 text-white rounded-2xl p-6 shadow-sm">
+    <p class="text-sm text-indigo-100">Total Focus Time</p>
+
+    <h3
+        id="totalFocusHours"
+        class="text-4xl font-bold mt-2">
+        0 hrs
+    </h3>
+
+    <p class="text-sm text-indigo-100 mt-2">
+        ↑ Keep going!
+    </p>
+</div>
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                        <p class="text-sm text-slate-500">Plans Created</p>
+                        <h3 id="plansCreatedCount" class="text-4xl font-bold mt-2">0</h3>
+
+                        <div class="mt-5 h-2 bg-slate-200 rounded-full">
+                            <div class="h-2 bg-indigo-500 rounded-full w-[60%]"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-sm">
+                        <p class="text-sm text-slate-300">Current Goal</p>
+
+                        <h3 id="dashboardGoalTitle" class="text-xl font-bold mt-4">
+                            Deep Flow State
+                        </h3>
+
+                        <p id="dashboardGoalSuggestion" class="text-sm text-slate-300 mt-2">
+                            Minimize distractions and complete today’s study block.
+                        </p>
+
+                        <a id="dashboardContinueLink" href="plans.html" class="block text-center mt-6 bg-white text-slate-900 w-full py-3 rounded-lg text-sm font-semibold">
+                            Continue Studying
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="lectorio.js"></script>
+<script src="dashboard-ai.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+</body>
+</html>

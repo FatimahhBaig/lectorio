@@ -1,0 +1,61 @@
+<aside class="w-64 bg-white border-r border-slate-200 h-screen sticky top-0 p-5 flex flex-col justify-between">
+
+  <div>
+    <!-- Logo -->
+    <div class="mb-8">
+      <h1 class="text-xl font-bold text-indigo-500">Lectorio</h1>
+      <p class="text-sm text-slate-500">Academic Mode</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="space-y-2">
+      <a href="dashboard.html" class="sidebar-link flex items-center gap-3 text-slate-700 hover:bg-slate-100 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200">
+        ▦ Dashboard
+      </a>
+
+      <a href="plans.html" class="sidebar-link flex items-center gap-3 text-slate-700 hover:bg-slate-100 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200">
+        ▤ My Plans
+      </a>
+
+      <a href="new-plan.html" class="sidebar-link flex items-center gap-3 text-slate-700 hover:bg-slate-100 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200">
+        ＋ New Plan
+      </a>
+
+      <a href="timer.html" class="sidebar-link flex items-center gap-3 text-slate-700 hover:bg-slate-100 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200">
+        ⏱ Timer
+      </a>
+
+      <a href="settings.html" class="sidebar-link flex items-center gap-3 text-slate-700 hover:bg-slate-100 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200">
+        ⚙ Settings
+      </a>
+    </nav>
+  </div>
+
+  <div>
+    <!-- Logout -->
+    <button
+      id="logoutBtn"
+      class="w-full bg-indigo-500 hover:bg-indigo-600 text-white py-3 rounded-xl text-sm font-semibold transition"
+    >
+      Logout
+    </button>
+
+    <!-- User Info -->
+    <div class="mt-5 flex items-center gap-3 bg-slate-50 p-3 rounded-xl">
+      <div class="w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center">
+        👤
+      </div>
+
+      <div class="overflow-hidden">
+        <p id="sidebarUserName" class="text-sm font-semibold text-slate-900 truncate">
+          User
+        </p>
+
+        <p id="sidebarUserEmail" class="text-xs text-slate-500 truncate">
+          user@email.com
+        </p>
+      </div>
+    </div>
+  </div>
+
+</aside>

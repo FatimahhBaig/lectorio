@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Lectorio</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS File -->
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- App Layout -->
+    <div class="min-h-screen flex">
+
+        <!-- Sidebar Start -->
+        <div id="sidebarContainer"></div>
+        <!-- Sidebar End -->
+
+
+        <!-- Main Area Start -->
+        <main class="flex-1">
+
+            <div class="p-8">
+
+                <!-- Page Header -->
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-slate-900">
+                        Settings
+                    </h2>
+
+                    <p class="mt-2 text-slate-500">
+                        Manage your account and study preferences.
+                    </p>
+                </div>
+
+
+                <!-- Settings Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Left Main Settings -->
+                    <div class="lg:col-span-2 space-y-6">
+
+                        <!-- Account Profile Card -->
+                        <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+
+                            <div class="flex items-center gap-5 mb-8">
+
+                                <!-- Profile Image -->
+                                <div class="relative">
+                                    <div class="w-20 h-20 bg-slate-300 rounded-full flex items-center justify-center text-3xl">
+                                        👤
+                                    </div>
+
+                                    <button class="absolute -bottom-1 -right-1 w-8 h-8 bg-indigo-500 text-white rounded-full flex items-center justify-center text-sm">
+                                        ✎
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-900">
+                                        Account Profile
+                                    </h3>
+
+                                    <p class="text-sm text-slate-500 mt-1">
+                                        Update your photo and personal details.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <!-- Form Inputs -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                                <div>
+                                    <label class="text-sm font-medium text-slate-700">
+                                        Full Name
+                                    </label>
+
+                                    <input 
+                                        type="text" 
+                                        value="Fatima Baig"
+                                        class="mt-2 w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    >
+                                </div>
+
+                                <div>
+                                    <label class="text-sm font-medium text-slate-700">
+                                        Email Address
+                                    </label>
+
+                                    <input 
+                                        type="email" 
+                                        value="fatima@example.com"
+                                        class="mt-2 w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    >
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <label class="text-sm font-medium text-slate-700">
+                                        University / Institution
+                                    </label>
+
+                                    <input 
+                                        type="text" 
+                                        value="University Student"
+                                        class="mt-2 w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    >
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Study Preferences Card -->
+                        <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-slate-900">
+                                    Study Preferences
+                                </h3>
+
+                                <p class="text-sm text-slate-500 mt-1">
+                                    Customize your deep focus environment.
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                                <!-- Session -->
+                                <div class="bg-slate-100 rounded-xl p-5">
+
+                                    <div class="text-indigo-500 text-xl mb-5">
+                                        ⏱
+                                    </div>
+
+                                    <p class="text-xs font-semibold text-slate-500 uppercase">
+                                        Session
+                                    </p>
+
+                                    <div class="mt-3 flex items-center gap-2">
+                                        <input 
+                                            type="number" 
+                                            value="45"
+                                            class="w-16 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        >
+
+                                        <span class="text-sm text-slate-500">
+                                            mins
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                                <!-- Break -->
+                                <div class="bg-slate-100 rounded-xl p-5">
+
+                                    <div class="text-amber-600 text-xl mb-5">
+                                        ☕
+                                    </div>
+
+                                    <p class="text-xs font-semibold text-slate-500 uppercase">
+                                        Break
+                                    </p>
+
+                                    <div class="mt-3 flex items-center gap-2">
+                                        <input 
+                                            type="number" 
+                                            value="10"
+                                            class="w-16 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        >
+
+                                        <span class="text-sm text-slate-500">
+                                            mins
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                                <!-- Weekly Goal -->
+                                <div class="bg-slate-100 rounded-xl p-5">
+
+                                    <div class="text-indigo-500 text-xl mb-5">
+                                        ⚑
+                                    </div>
+
+                                    <p class="text-xs font-semibold text-slate-500 uppercase">
+                                        Weekly Goal
+                                    </p>
+
+                                    <div class="mt-3 flex items-center gap-2">
+                                        <input 
+                                            type="number" 
+                                            value="25"
+                                            class="w-16 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        >
+
+                                        <span class="text-sm text-slate-500">
+                                            hours
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Right Settings Cards -->
+                    <div class="space-y-6">
+
+                        <!-- Subscription Card -->
+                        <div class="bg-indigo-500 text-white rounded-2xl p-8 shadow-lg shadow-indigo-200">
+
+                            <span class="bg-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                Current Plan
+                            </span>
+
+                            <h3 class="text-2xl font-bold mt-6">
+                                Lectorio Basic
+                            </h3>
+
+                            <p class="text-sm text-indigo-100 mt-2">
+                                Personal study planner mode.
+                            </p>
+
+                            <button class="mt-8 bg-white text-indigo-600 w-full py-3 rounded-xl text-sm font-semibold hover:bg-indigo-50 transition">
+                                Manage Plan
+                            </button>
+
+                        </div>
+
+
+                        <!-- Notifications Card -->
+                        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                            <h3 class="text-lg font-bold text-slate-900 mb-6">
+                                🔔 Notifications
+                            </h3>
+
+                            <!-- Notification Item -->
+                            <div class="space-y-5">
+
+                                <div class="flex items-center justify-between gap-4">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">
+                                            Study Reminders
+                                        </p>
+
+                                        <p class="text-xs text-slate-500">
+                                            Alerts before sessions start.
+                                        </p>
+                                    </div>
+
+                                    <button class="w-11 h-6 bg-slate-300 rounded-full relative">
+                                        <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></span>
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center justify-between gap-4">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">
+                                            Daily Summaries
+                                        </p>
+
+                                        <p class="text-xs text-slate-500">
+                                            Evening focus report.
+                                        </p>
+                                    </div>
+
+                                    <button class="w-11 h-6 bg-slate-300 rounded-full relative">
+                                        <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></span>
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center justify-between gap-4">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">
+                                            Achievement Alerts
+                                        </p>
+
+                                        <p class="text-xs text-slate-500">
+                                            Milestones and badges.
+                                        </p>
+                                    </div>
+
+                                    <button class="w-11 h-6 bg-slate-300 rounded-full relative">
+                                        <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Privacy Card -->
+                        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+                            <h3 class="text-lg font-bold text-slate-900">
+                                🔒 Privacy Settings
+                            </h3>
+
+                            <p class="mt-3 text-sm text-slate-500">
+                                Review how your study data is stored locally on this browser.
+                            </p>
+
+                            <a href="#" class="inline-block mt-4 text-sm text-indigo-500 font-semibold">
+                                View Privacy Policy
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Bottom Save Area -->
+                <div class="mt-10 border-t border-slate-200 pt-6 flex justify-end gap-4">
+
+                    <button class="bg-white border border-slate-300 px-6 py-3 rounded-xl text-sm font-semibold hover:bg-slate-100 transition">
+                        Reset to Default
+                    </button>
+
+                    <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-xl text-sm font-semibold transition">
+                        Save All Changes
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Footer -->
+            <footer class="bg-white border-t border-slate-200 px-8 py-6 mt-10">
+
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">
+                            Lectorio
+                        </h3>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            © 2024 Lectorio. Engineered for deep focus.
+                        </p>
+                    </div>
+
+                    <div class="flex gap-6 text-sm text-slate-600">
+                        <a href="#" class="hover:text-indigo-500">Privacy Policy</a>
+                        <a href="#" class="hover:text-indigo-500">Terms</a>
+                        <a href="#" class="hover:text-indigo-500">Support</a>
+                    </div>
+
+                </div>
+
+            </footer>
+
+        </main>
+        <!-- Main Area End -->
+
+    </div>
+
+    <script src="lectorio.js"></script>
+    <script src="auth.js"></script>
+    <script src="sidebar.js"></script>
+</body>
+
+</html>
