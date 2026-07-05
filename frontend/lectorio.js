@@ -299,8 +299,119 @@ if (breakRange && breakValue) {
 
 const lectureNotes = document.getElementById("lectureNotes");
 const generatePlanBtn = document.getElementById("generatePlanBtn");
+const planLoadingMessages = [
+  "📄 Reading your lecture...",
+  "🧠 Understanding your topics...",
+  "📚 Organizing chapters...",
+  "⏳ Building your study plan...",
+  "✨ Almost ready..."
+];
+
+let isGeneratingPlan = false;
+let planLoadingMessageIndex = 0;
+let planLoadingMessageTimer = null;
+let planLoadingLottie = null;
+
+function beginGeneratePlanLoading() {
+  isGeneratingPlan = true;
+
+  if (generatePlanBtn) {
+    generatePlanBtn.disabled = true;
+    generatePlanBtn.textContent = "Generating Plan...";
+    generatePlanBtn.classList.add("cursor-not-allowed", "opacity-80");
+  }
+
+  if (document.getElementById("planLoadingOverlay")) return;
+
+  const overlay = document.createElement("div");
+  overlay.id = "planLoadingOverlay";
+  overlay.className = "plan-loading-overlay";
+  overlay.setAttribute("role", "status");
+  overlay.setAttribute("aria-live", "polite");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.innerHTML = `
+    <div class="plan-loading-panel">
+      <div id="planLoadingAnimation" class="plan-loading-animation" aria-hidden="true"></div>
+      <p class="plan-loading-title">Creating your personalized study plan...</p>
+      <p id="planLoadingMessage" class="plan-loading-message">${planLoadingMessages[0]}</p>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  document.body.classList.add("plan-loading-lock");
+
+  requestAnimationFrame(function () {
+    overlay.classList.add("is-visible");
+  });
+
+  const animationContainer = document.getElementById("planLoadingAnimation");
+
+  if (window.lottie && animationContainer) {
+    planLoadingLottie = window.lottie.loadAnimation({
+      container: animationContainer,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "assets/lottie/Lurking%20Cat.json"
+    });
+  }
+
+  planLoadingMessageIndex = 0;
+  clearInterval(planLoadingMessageTimer);
+  planLoadingMessageTimer = setInterval(function () {
+    const message = document.getElementById("planLoadingMessage");
+    if (!message) return;
+
+    message.classList.add("is-changing");
+
+    setTimeout(function () {
+      planLoadingMessageIndex =
+        (planLoadingMessageIndex + 1) % planLoadingMessages.length;
+      message.textContent = planLoadingMessages[planLoadingMessageIndex];
+      message.classList.remove("is-changing");
+    }, 180);
+  }, 2600);
+}
+
+function finishGeneratePlanLoading(callback) {
+  clearInterval(planLoadingMessageTimer);
+  planLoadingMessageTimer = null;
+
+  if (planLoadingLottie) {
+    planLoadingLottie.destroy();
+    planLoadingLottie = null;
+  }
+
+  const overlay = document.getElementById("planLoadingOverlay");
+
+  if (!overlay) {
+    document.body.classList.remove("plan-loading-lock");
+    if (callback) callback();
+    return;
+  }
+
+  overlay.classList.remove("is-visible");
+  document.body.classList.remove("plan-loading-lock");
+
+  setTimeout(function () {
+    overlay.remove();
+    if (callback) callback();
+  }, 220);
+}
+
+function resetGeneratePlanButton() {
+  isGeneratingPlan = false;
+
+  if (generatePlanBtn) {
+    generatePlanBtn.disabled = false;
+    generatePlanBtn.textContent = "Generate My Plan";
+    generatePlanBtn.classList.remove("cursor-not-allowed", "opacity-80");
+  }
+}
 
 async function saveNewPlan() {
+  beginGeneratePlanLoading();
+
   let fileName = "No file uploaded";
 
   if (lectureFile && lectureFile.files.length > 0) {
@@ -325,9 +436,6 @@ async function saveNewPlan() {
   }
 
   try {
-    generatePlanBtn.textContent = "Generating Plan...";
-    generatePlanBtn.disabled = true;
-
     const response = await fetch(API_BASE_URL + "/plans", {
       method: "POST",
       headers: {
@@ -343,17 +451,23 @@ async function saveNewPlan() {
     }
 
     localStorage.setItem("selectedPlanId", savedPlan._id);
-    window.location.href = "plan-detail.html";
+    finishGeneratePlanLoading(function () {
+      window.location.href = "plan-detail.html";
+    });
   } catch (error) {
     console.log(error);
+    finishGeneratePlanLoading();
+    resetGeneratePlanButton();
     alert(error.message || "Could not generate plan.");
-    generatePlanBtn.textContent = "Generate My Plan";
-    generatePlanBtn.disabled = false;
   }
 }
 
 if (generatePlanBtn) {
   generatePlanBtn.addEventListener("click", function () {
+    if (isGeneratingPlan) return;
+
+    beginGeneratePlanLoading();
+
     let fileName = "No file uploaded";
 
     if (lectureFile && lectureFile.files.length > 0) {
@@ -363,6 +477,7 @@ if (generatePlanBtn) {
     const notes = lectureNotes ? lectureNotes.value : "";
 
     if (fileName === "No file uploaded" && notes.trim() === "") {
+      finishGeneratePlanLoading(resetGeneratePlanButton);
       alert("Please upload a file or paste lecture notes first.");
       return;
     }
@@ -394,9 +509,10 @@ if (generatePlanBtn) {
         " words. Estimated study time is around " +
         estimatedStudyMinutes +
         " minutes. With your current settings, we recommend approximately " +
-        recommendedDays +
+          recommendedDays +
         " days.";
 
+      finishGeneratePlanLoading(resetGeneratePlanButton);
       studyWarningModal.classList.remove("hidden");
 
       cancelPlanBtn.onclick = function () {

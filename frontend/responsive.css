@@ -100,6 +100,73 @@ textarea {
   white-space: normal;
 }
 
+.plan-loading-lock {
+  overflow: hidden;
+}
+
+.plan-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  pointer-events: all;
+  transition: opacity 220ms ease;
+}
+
+.plan-loading-overlay.is-visible {
+  opacity: 1;
+}
+
+.plan-loading-panel {
+  width: min(100%, 28rem);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.94);
+  padding: clamp(1.5rem, 6vw, 2.5rem);
+  text-align: center;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+  transform: translateY(0.75rem) scale(0.98);
+  transition: transform 220ms ease;
+}
+
+.plan-loading-overlay.is-visible .plan-loading-panel {
+  transform: translateY(0) scale(1);
+}
+
+.plan-loading-animation {
+  width: min(64vw, 13rem);
+  height: min(64vw, 13rem);
+  margin: 0 auto;
+}
+
+.plan-loading-title {
+  margin-top: 1rem;
+  color: rgb(15 23 42);
+  font-size: clamp(1.125rem, 4vw, 1.375rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.plan-loading-message {
+  min-height: 1.75rem;
+  margin-top: 0.75rem;
+  color: rgb(71 85 105);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.plan-loading-message.is-changing {
+  opacity: 0;
+  transform: translateY(0.25rem);
+}
+
 #sidebarContainer {
   flex: 0 0 16rem;
   min-width: 16rem;
