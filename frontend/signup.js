@@ -24,7 +24,7 @@ signupForm.addEventListener("submit", async function (e) {
   message.className = "text-sm text-center font-medium text-slate-500";
 
   try {
-    const response = await fetch("http://localhost:5001/signup", {
+    const response = await fetch("https://lectorio.onrender.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

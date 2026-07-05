@@ -23,7 +23,7 @@ function escapeTopicHtml(value) {
 
 async function prepareTopicNavigation(planId, currentTopic, currentDay) {
   const response = await fetch(
-    "http://localhost:5001/plans/" + planId,
+    "https://lectorio.onrender.com/plans/" + planId,
     {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("lectorioToken")
@@ -88,7 +88,7 @@ async function loadTopicAI() {
 
   try {
     const response = await fetch(
-      "http://localhost:5001/plans/" + planId + "/topic-explanation",
+      "https://lectorio.onrender.com/plans/" + planId + "/topic-explanation",
       {
         method: "POST",
         headers: {

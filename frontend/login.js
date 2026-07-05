@@ -23,7 +23,7 @@ loginForm.addEventListener("submit", async function (e) {
   message.className = "text-center text-sm font-medium text-slate-500";
 
   try {
-    const response = await fetch("http://localhost:5001/login", {
+    const response = await fetch("https://lectorio.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
