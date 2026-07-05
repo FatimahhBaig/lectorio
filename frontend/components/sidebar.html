@@ -1,10 +1,15 @@
-<aside class="w-64 bg-white border-r border-slate-200 h-screen sticky top-0 p-5 flex flex-col justify-between">
+<aside id="appSidebar" class="w-64 bg-white border-r border-slate-200 h-screen sticky top-0 p-5 flex flex-col justify-between">
 
   <div>
     <!-- Logo -->
-    <div class="mb-8">
-      <h1 class="text-xl font-bold text-indigo-500">Lectorio</h1>
-      <p class="text-sm text-slate-500">Academic Mode</p>
+    <div class="mb-8 flex items-start justify-between gap-4">
+      <div>
+        <h1 class="text-xl font-bold text-indigo-500">Lectorio</h1>
+        <p class="text-sm text-slate-500">Academic Mode</p>
+      </div>
+      <button id="sidebarCloseBtn" type="button" class="mobile-close-button lg:hidden" aria-label="Close navigation">
+        x
+      </button>
     </div>
 
     <!-- Navigation -->

@@ -36,9 +36,9 @@ async function loadAIPlanDetail() {
           : `<span class="bg-slate-100 text-slate-500 text-xs font-semibold px-3 py-1 rounded-full">Not Started</span>`;
 
       return `
-        <article class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mb-5">
-          <div class="flex items-start justify-between gap-4">
-            <h3 class="text-lg font-bold text-slate-900">
+        <article class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mb-5 min-w-0">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <h3 class="text-lg font-bold text-slate-900 break-words">
               Day ${dayNumber}: ${escapeHtml(studyDay.title || "Study Session")}
             </h3>
             ${status}
@@ -81,7 +81,7 @@ async function loadAIPlanDetail() {
                   type="button"
                   data-topic="${escapeHtml(topic)}"
                   data-day="${dayNumber}"
-                  class="openTopicBtn bg-violet-50 text-violet-700 border border-violet-200 px-3 py-1 rounded-full text-xs hover:bg-violet-100">
+                  class="openTopicBtn bg-violet-50 text-violet-700 border border-violet-200 px-3 py-2 rounded-full text-xs hover:bg-violet-100">
                   ${escapeHtml(topic)}
                 </button>
               `).join("")}

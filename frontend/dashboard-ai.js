@@ -42,8 +42,8 @@ async function loadAIDashboardRecommendation() {
     const primaryTopic = (nextDay.topics || [nextDay.title])[0];
 
     sessionsContainer.innerHTML = `
-      <div class="flex items-start justify-between gap-4">
-        <div class="border-l-4 border-indigo-500 pl-4">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div class="min-w-0 border-l-4 border-indigo-500 pl-4">
           <p class="text-xs font-semibold text-indigo-600">Recommended Next</p>
           <h4 class="font-semibold text-slate-900 mt-1">
             Day ${nextDay.day}: ${escapeHtml(primaryTopic)}

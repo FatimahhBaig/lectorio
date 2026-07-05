@@ -8,6 +8,7 @@
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="responsive.css">
 
     <!-- CSS File -->
 </head>
@@ -15,7 +16,7 @@
 <body class="bg-slate-50 text-slate-900">
 
     <!-- App Layout -->
-    <div class="min-h-screen flex">
+    <div class="min-h-screen flex app-shell">
 
         <!-- Sidebar Start -->
         <div id="sidebarContainer"></div>
@@ -23,17 +24,17 @@
 
 
         <!-- Main Area Start -->
-  <main class="flex-1">
+  <main class="flex-1 app-main">
 
-            <div class="p-8">
+            <div class="page-pad">
 
                 <!-- Header -->
-                <div class="flex items-start justify-between mb-8">
+                <div class="flex items-start justify-between gap-4 mb-8 mobile-stack">
 
                     <div>
                         <h2
                           id="planTitle"
-                          class="text-4xl font-bold text-slate-900">
+                          class="page-heading font-bold text-slate-900">
                            Loading Plan...
                            </h2>
 
@@ -44,14 +45,14 @@
                           </p>
                     </div>
 
-                    <div class="flex gap-3">
+                    <div class="responsive-actions">
 
                         <button class="bg-white border border-slate-300 px-5 py-3 rounded-xl text-sm font-semibold hover:bg-slate-100 transition">
                             ✎ Edit Parameters
                         </button>
 
                         <a href="timer.html"
-                            class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-sm font-semibold transition">
+                            class="inline-flex min-h-11 items-center justify-center bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-sm font-semibold transition">
                             ▶ Start First Session
                         </a>
 
@@ -207,7 +208,7 @@
 
 
             <!-- Footer -->
-            <footer class="bg-white border-t border-slate-200 px-8 py-6 mt-10">
+            <footer class="bg-white border-t border-slate-200 px-4 py-6 mt-10 sm:px-6 lg:px-8">
 
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
 
@@ -221,7 +222,7 @@
                         </p>
                     </div>
 
-                    <div class="flex gap-6 text-sm text-slate-600">
+                    <div class="flex flex-wrap gap-4 text-sm text-slate-600 sm:gap-6">
                         <a href="#" class="hover:text-indigo-500">Privacy Policy</a>
                         <a href="#" class="hover:text-indigo-500">Terms</a>
                         <a href="#" class="hover:text-indigo-500">Support</a>

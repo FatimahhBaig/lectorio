@@ -8,6 +8,7 @@
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="responsive.css">
 
     <!-- CSS File -->
 </head>
@@ -15,7 +16,7 @@
 <body class="bg-slate-50 text-slate-900">
 
     <!-- App Layout -->
-    <div class="min-h-screen flex">
+    <div class="min-h-screen flex app-shell">
 
         <!-- Sidebar Start -->
         <div id="sidebarContainer"></div>
@@ -23,14 +24,14 @@
 
 
         <!-- Main Area Start -->
-        <main class="flex-1">
+        <main class="flex-1 app-main">
 
             <!-- Main Content -->
-            <div class="p-8">
+            <div class="page-pad">
 
                 <!-- Page Header -->
                 <div class="mb-8">
-                    <h2 class="text-4xl font-bold text-slate-900">
+                    <h2 class="page-heading font-bold text-slate-900">
                         Transform Your Learning
                     </h2>
 
@@ -47,7 +48,7 @@
                     <div class="lg:col-span-2 space-y-6">
 
                         <!-- Upload Box -->
-                        <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-10 text-center">
+                        <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl card-pad text-center">
 
                             <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto text-3xl mb-5">
                                 ⇧
@@ -69,7 +70,7 @@
                             <button
                              id="browseFileBtn"
                              type="button"
-                             class="mt-6 bg-indigo-100 text-indigo-600 px-6 py-3 rounded-lg text-sm font-semibold hover:bg-indigo-200 transition">
+                             class="mt-6 inline-flex min-h-11 items-center justify-center bg-indigo-100 text-indigo-600 px-6 py-3 rounded-lg text-sm font-semibold hover:bg-indigo-200 transition">
                                  Browse Files
                              </button>
                              <p id="selectedFileName" class="mt-4 text-sm text-slate-500">
@@ -78,13 +79,13 @@
                             <button
                         id="changeFileBtn"
                         type="button"
-                        class="hidden mt-4 bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm">
+                        class="hidden mt-4 min-h-11 bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm">
                         Change File
                           </button>
                         </div>
 
                         <!-- Paste Notes Box -->
-                        <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+                        <div class="bg-white border border-slate-200 rounded-2xl card-pad shadow-sm">
 
                             <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
                                 <span class="text-indigo-500">≡</span>
@@ -106,7 +107,7 @@
                     <div class="space-y-6">
 
                         <!-- Plan Parameters Card -->
-                        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                        <div class="bg-white border border-slate-200 rounded-2xl card-pad shadow-sm">
 
                             <h3 class="text-lg font-bold text-slate-900">
                                 Plan Parameters
@@ -118,7 +119,7 @@
 
                             <!-- Completion Days -->
                             <div class="mt-8">
-                                <div class="flex justify-between text-sm font-medium text-slate-700">
+                                <div class="flex flex-wrap justify-between gap-2 text-sm font-medium text-slate-700">
                                     <label>Target Completion (Days)</label>
                                     <!-- <span class="text-indigo-600">7</span> -->
                                 </div>
@@ -129,7 +130,7 @@
 
                             <!-- Study Duration -->
                             <div class="mt-7">
-                                <div class="flex justify-between text-sm font-medium text-slate-700">
+                                <div class="flex flex-wrap justify-between gap-2 text-sm font-medium text-slate-700">
                                     <label>Study Session Duration (Min)</label>
                                     <!-- <span class="text-indigo-600">45</span> -->
                                 </div>
@@ -140,7 +141,7 @@
 
                             <!-- Break Duration -->
                             <div class="mt-7">
-                                <div class="flex justify-between text-sm font-medium text-slate-700">
+                                <div class="flex flex-wrap justify-between gap-2 text-sm font-medium text-slate-700">
                                     <label>Break Duration (Min)</label>
                                     <!-- <span class="text-indigo-600">10</span> -->
                                 </div>
@@ -158,7 +159,7 @@
                         </div>
 
                         <!-- Pro Tip Card -->
-                        <div class="bg-slate-900 text-white rounded-2xl p-8 shadow-sm min-h-56 flex flex-col justify-end">
+                        <div class="bg-slate-900 text-white rounded-2xl card-pad shadow-sm min-h-56 flex flex-col justify-end">
 
                             <p class="text-xs font-bold text-indigo-200 uppercase">
                                 Pro Tip
@@ -183,7 +184,7 @@
 
 
             <!-- Footer -->
-            <footer class="bg-white border-t border-slate-200 px-8 py-6 mt-10">
+            <footer class="bg-white border-t border-slate-200 px-4 py-6 mt-10 sm:px-6 lg:px-8">
 
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
 
@@ -197,7 +198,7 @@
                         </p>
                     </div>
 
-                    <div class="flex gap-6 text-sm text-slate-600">
+                    <div class="flex flex-wrap gap-4 text-sm text-slate-600 sm:gap-6">
                         <a href="#" class="hover:text-indigo-500">Privacy Policy</a>
                         <a href="#" class="hover:text-indigo-500">Terms</a>
                         <a href="#" class="hover:text-indigo-500">Support</a>
@@ -215,9 +216,9 @@
 
 <div
     id="studyWarningModal"
-    class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
 
-    <div class="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-xl">
+    <div class="bg-white rounded-3xl card-pad max-w-lg w-full shadow-xl">
 
         <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-3xl mb-5">
             ⚠️
@@ -232,7 +233,7 @@
             class="mt-4 text-slate-500">
         </p>
 
-        <div class="mt-8 flex gap-3">
+        <div class="mt-8 responsive-actions">
 
             <button
                 id="cancelPlanBtn"

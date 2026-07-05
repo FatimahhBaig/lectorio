@@ -6,24 +6,25 @@
     <title>My Plans - Lectorio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="responsive.css">
 </head>
 
 <body class="bg-slate-50 text-slate-900">
 
-<div class="min-h-screen flex">
+<div class="min-h-screen flex app-shell">
 
     <!-- Sidebar -->
     <div id="sidebarContainer"></div>
 
     <!-- Main -->
-    <main class="flex-1">
+    <main class="flex-1 app-main">
 
-        <div class="p-8">
+        <div class="page-pad">
 
             <!-- Header -->
-            <div class="flex items-start justify-between mb-8">
+            <div class="flex items-start justify-between gap-4 mb-8 mobile-stack">
                 <div>
-                    <h2 class="text-4xl font-bold text-slate-900">
+                    <h2 class="page-heading font-bold text-slate-900">
                         My Plans
                     </h2>
 
@@ -33,7 +34,7 @@
                 </div>
 
                 <a href="new-plan.html"
-                   class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-sm font-semibold">
+                   class="inline-flex min-h-11 items-center justify-center bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-sm font-semibold">
                     ＋ New Plan
                 </a>
             </div>
@@ -48,7 +49,7 @@
         </div>
 
         <!-- Footer -->
-        <footer class="bg-white border-t border-slate-200 px-8 py-6 mt-10">
+        <footer class="bg-white border-t border-slate-200 px-4 py-6 mt-10 sm:px-6 lg:px-8">
             <div class="flex justify-between">
                 <div>
                     <h3 class="text-lg font-bold text-slate-900">

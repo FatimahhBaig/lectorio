@@ -455,12 +455,12 @@ async function loadPlansPage() {
       const completedDays = getCompletedDays(plan);
 
       plansListContainer.innerHTML += `
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm min-w-0">
           <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-2xl mb-5">
             DOC
           </div>
 
-          <h3 class="text-xl font-bold text-slate-900">${escapeHtml(plan.title)}</h3>
+          <h3 class="text-xl font-bold text-slate-900 break-words">${escapeHtml(plan.title)}</h3>
 
           <p class="mt-2 text-slate-500">
             Generated on ${formatPlanDate(plan.createdAt)} - ${plan.days} days - ${plan.studyTime} min study - ${plan.breakTime} min break
@@ -470,7 +470,7 @@ async function loadPlansPage() {
             Progress: ${completedDays.length}/${plan.days}
           </p>
 
-          <div class="mt-5 flex gap-3">
+          <div class="mt-5 responsive-actions">
             <button
               data-plan-id="${planId}"
               class="openPlanBtn bg-indigo-500 text-white px-5 py-3 rounded-xl text-sm font-semibold">
@@ -598,9 +598,9 @@ async function loadPlanDetailPage() {
         const quiz = Array.isArray(studyDay.quiz) ? studyDay.quiz : [];
 
         generatedPlanContainer.innerHTML += `
-          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mb-5">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-bold text-slate-900">
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mb-5 min-w-0">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <h3 class="text-lg font-bold text-slate-900 break-words">
                 Day ${dayNumber}: ${escapeHtml(studyDay.title || "Study Session")}
               </h3>
 
@@ -1158,9 +1158,9 @@ async function loadDashboardPage() {
 
         dashboardPlansList.innerHTML += `
           <div class="border-b border-slate-100 pb-5">
-            <div class="flex items-center justify-between">
-              <div>
-                <h4 class="font-semibold text-slate-900">${escapeHtml(plan.title)}</h4>
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div class="min-w-0">
+                <h4 class="font-semibold text-slate-900 break-words">${escapeHtml(plan.title)}</h4>
                 <p class="text-sm text-slate-500 mt-1">
                   ${completedDays.length}/${plan.days} sessions completed
                 </p>
@@ -1168,7 +1168,7 @@ async function loadDashboardPage() {
 
               <button
                 data-plan-id="${planId}"
-                class="openPlanBtn bg-indigo-100 text-indigo-600 text-xs font-semibold px-3 py-1 rounded-full">
+                class="openPlanBtn bg-indigo-100 text-indigo-600 text-xs font-semibold px-4 py-2 rounded-full">
                 Open
               </button>
             </div>

@@ -6,27 +6,28 @@
     <title>Study Session - Lectorio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="responsive.css">
 </head>
 
 <body class="bg-slate-50 text-slate-900">
 
-<div class="min-h-screen flex">
+<div class="min-h-screen flex app-shell">
 
     <!-- SIDEBAR -->
     <div id="sidebarContainer"></div>
     <!-- MAIN -->
-    <main class="flex-1 p-8">
+    <main class="flex-1 app-main page-pad">
 
         <!-- HEADER -->
-        <div class="flex justify-between items-start mb-8">
+        <div class="flex justify-between items-start gap-4 mb-8 mobile-stack">
             <div>
-                <h2 class="text-4xl font-bold">Study Session</h2>
+                <h2 class="page-heading font-bold">Study Session</h2>
                 <p id="sessionDay" class="mt-2 text-sm text-slate-500">
                     Day 1 of 7 · Modern History of South Asia
                 </p>
             </div>
 
-            <div class="w-64">
+            <div class="w-full sm:w-64">
                 <div class="flex justify-between text-xs mb-2">
                     <span>Overall Progress</span>
                     <span id="overallProgressText" class="font-bold text-indigo-600">14%</span>
@@ -45,7 +46,7 @@
 
                 <!-- LECTURE CARD -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <div class="flex justify-between items-start">
+                    <div class="flex flex-wrap justify-between items-start gap-3">
                         <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-2xl">
                             📄
                         </div>
@@ -79,7 +80,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-5 bg-indigo-100 rounded-xl p-4 flex justify-between items-center">
+                    <div class="mt-5 bg-indigo-100 rounded-xl p-4 flex flex-wrap justify-between items-center gap-3">
                         <div>
                             <p class="text-xs font-bold text-indigo-600 uppercase">Next Block</p>
                             <h4 id="nextBlockTime" class="font-bold text-indigo-700">45:00</h4>
@@ -110,7 +111,7 @@
             <div class="lg:col-span-2 space-y-6">
 
                 <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <div class="flex items-center justify-between gap-4">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
                         <h3 class="text-lg font-bold text-slate-900">Simple Explanation</h3>
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-semibold">
                             AI Simplified
@@ -227,7 +228,7 @@
 
                 <!-- NOTES -->
                 <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-                    <div class="bg-slate-100 px-5 py-3 flex justify-between">
+                    <div class="bg-slate-100 px-5 py-3 flex flex-wrap justify-between gap-3">
                         <h3 class="font-bold text-sm">☰ Session Notes</h3>
                         <div class="text-xs text-slate-500">B &nbsp; I &nbsp; ≡</div>
                     </div>
@@ -244,7 +245,7 @@
                         Weekly Roadmap
                     </p>
 
-                    <div id="weeklyRoadmap" class="flex justify-between items-center">
+                    <div id="weeklyRoadmap" class="flex justify-between items-center gap-4 mobile-scroll-x">
                         <div class="text-center">
                             <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center mx-auto font-bold">1</div>
                             <p class="text-xs mt-2">Today</p>
@@ -283,12 +284,12 @@
                 </div>
 
                 <!-- BOTTOM ACTIONS -->
-                <div class="flex justify-between items-center border-t border-slate-200 pt-6">
+                <div class="flex justify-between items-center gap-4 border-t border-slate-200 pt-6 mobile-stack">
                     <p class="text-sm text-slate-500 italic">
                         Tip: Take a 5 minute break every 45 minutes for optimal retention.
                     </p>
 
-                    <div class="flex gap-3">
+                    <div class="responsive-actions">
                         <button
   id="markCompleteBtn"
   class="bg-indigo-600 text-white px-6 py-3 rounded-xl"
