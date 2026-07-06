@@ -44,11 +44,22 @@ signupForm.addEventListener("submit", async function (e) {
       return;
     }
 
-    message.textContent = "Account created successfully!";
+    const pendingEmail = data.email || email;
+    localStorage.setItem("lectorioPendingVerificationEmail", pendingEmail);
+
+    if (data.verificationCodeExpires) {
+      localStorage.setItem(
+        "lectorioVerificationExpiresAt",
+        data.verificationCodeExpires
+      );
+    }
+
+    message.textContent = "Account created. Check your email for the code.";
     message.className = "text-sm text-center font-medium text-green-600";
 
     setTimeout(() => {
-      window.location.href = "login.html";
+      window.location.href =
+        "verify-email.html?email=" + encodeURIComponent(pendingEmail);
     }, 1200);
 
   } catch (error) {

@@ -15,6 +15,32 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
+
+    verificationCode: {
+        type: String
+    },
+
+    verificationCodeExpires: {
+        type: Date
+    },
+
+    verificationLastSentAt: {
+        type: Date
+    },
+
+    verificationAttempts: {
+        type: Number,
+        default: 0
+    },
+
+    verificationLockedUntil: {
+        type: Date
     }
 });
 

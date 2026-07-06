@@ -167,6 +167,27 @@ textarea {
   transform: translateY(0.25rem);
 }
 
+.verify-success-pop {
+  animation: verifySuccessPop 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes verifySuccessPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 #sidebarContainer {
   flex: 0 0 16rem;
   min-width: 16rem;

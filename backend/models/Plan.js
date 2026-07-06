@@ -45,6 +45,19 @@ const topicLessonSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const videoRecommendationSchema = new mongoose.Schema(
+  {
+    title: String,
+    channel: {
+      type: String,
+      default: ""
+    },
+    reason: String,
+    url: String
+  },
+  { _id: false }
+);
+
 const generatedDaySchema = new mongoose.Schema(
   {
     day: {
@@ -106,6 +119,13 @@ const generatedDaySchema = new mongoose.Schema(
       type: [quizQuestionSchema],
       default: []
     },
+
+    videoRecommendations: {
+      type: [videoRecommendationSchema],
+      default: []
+    },
+
+    videoRecommendationsGeneratedAt: Date,
 
     completedAt: Date
   },
