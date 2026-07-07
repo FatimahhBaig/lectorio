@@ -5,6 +5,7 @@ const { PDFParse } = require("pdf-parse");
 
 const Plan = require("../models/Plan");
 const authMiddleware = require("../middleware/authMiddleware");
+const { getRecommendedVideosForStudyDay } = require("../services/youtubeService");
 
 const router = express.Router();
 
@@ -105,111 +106,6 @@ function validateGeneratedPlan(generatedPlan, days, studyTime) {
         .filter(Boolean)
     };
   });
-}
-
-function buildYouTubeSearchUrl(query) {
-  return "https://www.youtube.com/results?search_query=" + encodeURIComponent(query);
-}
-
-function normalizeVideoRecommendations(rawRecommendations, studyDay, planTitle) {
-  if (!Array.isArray(rawRecommendations)) return [];
-
-  return rawRecommendations
-    .slice(0, 5)
-    .map(recommendation => {
-      const title = String(recommendation.title || "").trim();
-      const channel = String(recommendation.channel || "").trim();
-      const reason = String(recommendation.reason || "").trim();
-      const query = String(
-        recommendation.searchQuery ||
-          [title, channel, studyDay.topics.join(" "), planTitle, "lecture tutorial"]
-            .filter(Boolean)
-            .join(" ")
-      ).trim();
-      const directUrl = String(recommendation.url || "").trim();
-      const safeUrl = directUrl.startsWith("https://www.youtube.com/") ||
-        directUrl.startsWith("https://youtu.be/")
-          ? directUrl
-          : buildYouTubeSearchUrl(query || title || studyDay.title);
-
-      return {
-        title,
-        channel,
-        reason,
-        url: safeUrl
-      };
-    })
-    .filter(recommendation => recommendation.title && recommendation.reason)
-    .slice(0, 5);
-}
-
-async function generateVideoRecommendationsForDay(plan, studyDay) {
-  const parsedData = await callOpenRouter([
-    {
-      role: "system",
-      content:
-        "You recommend high-quality YouTube learning videos for students. Return valid JSON only. Do not invent exact video URLs unless you are highly confident; prefer search queries."
-    },
-    {
-      role: "user",
-      content: `
-Recommend 3 to 5 highly relevant YouTube learning videos for this study day.
-
-PLAN TITLE:
-${plan.title}
-
-STUDY DAY:
-Day ${studyDay.day}: ${studyDay.title}
-
-DAY TOPICS:
-${studyDay.topics.join(", ")}
-
-DAY SUMMARY:
-${studyDay.summary}
-
-DAY EXPLANATION:
-${studyDay.explanation}
-
-KEY POINTS:
-${studyDay.keyPoints.join(" | ")}
-
-LECTURE CONTEXT:
-${plan.notes.slice(0, 12000)}
-
-Return valid JSON only using exactly this structure:
-{
-  "recommendations": [
-    {
-      "title": "Likely YouTube video title or precise search title",
-      "channel": "Channel name if known, otherwise empty string",
-      "reason": "Short reason this helps with the day's topics",
-      "searchQuery": "Specific YouTube search query for this recommendation",
-      "url": ""
-    }
-  ]
-}
-
-Rules:
-- Recommend videos that teach the day's topics, not generic productivity content.
-- Include 3 to 5 recommendations.
-- Keep reasons under 22 words.
-- Use the lecture topics to guide relevance.
-- If unsure about an exact URL, leave url empty and provide a strong YouTube search query.
-`
-    }
-  ]);
-
-  const recommendations = normalizeVideoRecommendations(
-    parsedData.recommendations,
-    studyDay,
-    plan.title
-  );
-
-  if (recommendations.length < 3) {
-    throw new Error("AI returned too few video recommendations");
-  }
-
-  return recommendations;
 }
 
 async function extractPdfText(fileBuffer) {
@@ -619,9 +515,9 @@ router.post("/:id/video-recommendations", authMiddleware, async (req, res) => {
       }
 
       try {
-        const recommendations = await generateVideoRecommendationsForDay(
-          plan,
-          studyDay
+        const recommendations = await getRecommendedVideosForStudyDay(
+          studyDay,
+          5
         );
 
         if (recommendations.length > 0) {

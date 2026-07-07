@@ -28,7 +28,11 @@ async function loadAIPlanDetail() {
   }
 }
 
-function renderVideoRecommendations(studyDay, isLoading) {
+function getVideoUrl(recommendation) {
+  return recommendation.youtubeUrl || recommendation.url || "#";
+}
+
+function renderVideoRecommendations(studyDay, isLoading, hasError) {
   const recommendations = Array.isArray(studyDay.videoRecommendations)
     ? studyDay.videoRecommendations
     : [];
@@ -38,7 +42,8 @@ function renderVideoRecommendations(studyDay, isLoading) {
       <section class="mt-6 border-t border-slate-100 pt-5">
         <div class="flex items-center justify-between gap-3">
           <h4 class="font-bold text-slate-900">📺 Recommended Videos</h4>
-          <span class="rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">
+          <span class="inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">
+            <span class="h-2 w-2 animate-ping rounded-full bg-red-500"></span>
             Finding videos
           </span>
         </div>
@@ -46,11 +51,22 @@ function renderVideoRecommendations(studyDay, isLoading) {
         <div class="mt-3 grid gap-3 sm:grid-cols-2">
           ${[1, 2].map(() => `
             <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <div class="h-4 w-3/4 animate-pulse rounded bg-slate-200"></div>
+              <div class="aspect-video w-full animate-pulse rounded-xl bg-slate-200"></div>
+              <div class="mt-4 h-4 w-3/4 animate-pulse rounded bg-slate-200"></div>
               <div class="mt-3 h-3 w-1/2 animate-pulse rounded bg-slate-200"></div>
-              <div class="mt-5 h-10 w-full animate-pulse rounded-xl bg-slate-200"></div>
             </div>
           `).join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  if (hasError) {
+    return `
+      <section class="mt-6 border-t border-slate-100 pt-5">
+        <h4 class="font-bold text-slate-900">📺 Recommended Videos</h4>
+        <div class="mt-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-800">
+          We could not fetch video recommendations right now. The rest of your study plan is ready.
         </div>
       </section>
     `;
@@ -73,32 +89,47 @@ function renderVideoRecommendations(studyDay, isLoading) {
 
       <div class="mt-3 grid gap-3 sm:grid-cols-2">
         ${recommendations.map(recommendation => `
-          <article class="group flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-red-200 hover:shadow-md">
-            <div class="flex items-start gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600">
-                ▶
-              </div>
-              <div class="min-w-0">
-                <h5 class="break-words text-sm font-bold text-slate-900">
-                  ${escapeHtml(recommendation.title)}
-                </h5>
-                <p class="mt-1 text-xs font-semibold text-slate-500">
-                  ${escapeHtml(recommendation.channel || "YouTube")}
-                </p>
-              </div>
-            </div>
-
-            <p class="mt-3 flex-1 text-sm leading-6 text-slate-600">
-              ${escapeHtml(recommendation.reason || "Helpful for this study day's topics.")}
-            </p>
-
+          <article class="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-red-200 hover:shadow-md">
             <a
-              href="${escapeHtml(recommendation.url)}"
+              href="${escapeHtml(getVideoUrl(recommendation))}"
               target="_blank"
               rel="noopener noreferrer"
-              class="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-slate-950 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-600">
-              Watch on YouTube
+              class="relative block bg-slate-100">
+              ${
+                recommendation.thumbnail
+                  ? `<img src="${escapeHtml(recommendation.thumbnail)}" alt="" class="aspect-video w-full object-cover">`
+                  : `<div class="aspect-video w-full bg-slate-100"></div>`
+              }
+              ${
+                recommendation.duration
+                  ? `<span class="absolute bottom-2 right-2 rounded bg-slate-950/90 px-2 py-1 text-xs font-bold text-white">${escapeHtml(recommendation.duration)}</span>`
+                  : ""
+              }
             </a>
+
+            <div class="flex flex-1 flex-col p-4">
+              <div class="flex items-start gap-3">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-sm font-black text-red-600">
+                  YT
+                </div>
+                <div class="min-w-0">
+                  <h5 class="break-words text-sm font-bold leading-6 text-slate-900">
+                    ${escapeHtml(recommendation.title)}
+                  </h5>
+                  <p class="mt-1 text-xs font-semibold text-slate-500">
+                    ${escapeHtml(recommendation.channel || "YouTube")}
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="${escapeHtml(getVideoUrl(recommendation))}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-slate-950 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-600">
+                Watch on YouTube
+              </a>
+            </div>
           </article>
         `).join("")}
       </div>
@@ -108,6 +139,7 @@ function renderVideoRecommendations(studyDay, isLoading) {
 
 function renderPlanDays(container, plan, days, completedDays, options) {
   const loadingVideos = Boolean(options && options.loadingVideos);
+  const videoError = Boolean(options && options.videoError);
 
   container.innerHTML = days.map(studyDay => {
       const dayNumber = Number(studyDay.day);
@@ -198,6 +230,9 @@ function renderPlanDays(container, plan, days, completedDays, options) {
             studyDay,
             loadingVideos &&
               (!Array.isArray(studyDay.videoRecommendations) ||
+                studyDay.videoRecommendations.length === 0),
+            videoError &&
+              (!Array.isArray(studyDay.videoRecommendations) ||
                 studyDay.videoRecommendations.length === 0)
           )}
 
@@ -232,10 +267,14 @@ async function generateAndRenderVideoRecommendations(
       ? result.generatedPlan
       : days;
 
-    renderPlanDays(container, plan, updatedDays, completedDays);
+    renderPlanDays(container, plan, updatedDays, completedDays, {
+      videoError: Boolean(result.partialFailure)
+    });
   } catch (error) {
     console.log(error);
-    renderPlanDays(container, plan, days, completedDays);
+    renderPlanDays(container, plan, days, completedDays, {
+      videoError: true
+    });
   }
 }
 

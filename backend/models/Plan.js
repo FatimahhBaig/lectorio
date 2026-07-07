@@ -53,7 +53,23 @@ const videoRecommendationSchema = new mongoose.Schema(
       default: ""
     },
     reason: String,
-    url: String
+    url: String,
+    thumbnail: {
+      type: String,
+      default: ""
+    },
+    duration: {
+      type: String,
+      default: ""
+    },
+    youtubeUrl: {
+      type: String,
+      default: ""
+    },
+    videoId: {
+      type: String,
+      default: ""
+    }
   },
   { _id: false }
 );
