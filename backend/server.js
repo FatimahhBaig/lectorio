@@ -19,6 +19,8 @@ const VERIFICATION_CODE_MINUTES = 10;
 const RESEND_COOLDOWN_SECONDS = 60;
 const MAX_VERIFICATION_ATTEMPTS = 5;
 const VERIFICATION_LOCK_MINUTES = 15;
+// TODO: Re-enable email verification when sender domain is verified.
+const EMAIL_VERIFICATION_ENABLED = process.env.EMAIL_VERIFICATION_ENABLED === "true";
 
 app.use(cors());
 app.use(express.json());
@@ -147,20 +149,33 @@ app.post("/signup", async (req, res) => {
       email,
       password: hashedPassword,
     });
-    const verificationCode = await setVerificationCode(user);
+
+    let verificationCode = null;
+
+    if (EMAIL_VERIFICATION_ENABLED) {
+      verificationCode = await setVerificationCode(user);
+    } else {
+      // TODO: Re-enable email verification when sender domain is verified.
+      user.isVerified = true;
+    }
 
     await user.save();
 
-    try {
-      await sendVerificationEmail(user, verificationCode);
-    } catch (emailError) {
-      await User.deleteOne({ _id: user._id });
-      throw emailError;
+    if (EMAIL_VERIFICATION_ENABLED) {
+      try {
+        await sendVerificationEmail(user, verificationCode);
+      } catch (emailError) {
+        await User.deleteOne({ _id: user._id });
+        throw emailError;
+      }
     }
 
     res.status(201).json({
-      message: "Signup successful. Please verify your email.",
+      message: EMAIL_VERIFICATION_ENABLED
+        ? "Signup successful. Please verify your email."
+        : "Signup successful",
       email: user.email,
+      requiresVerification: EMAIL_VERIFICATION_ENABLED,
       verificationCodeExpires: user.verificationCodeExpires,
     });
   } catch (error) {
@@ -198,7 +213,8 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    if (!user.isVerified) {
+    // TODO: Re-enable email verification when sender domain is verified.
+    if (EMAIL_VERIFICATION_ENABLED && !user.isVerified) {
       return res.status(403).json({
         message: "Please verify your email first.",
       });

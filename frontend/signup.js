@@ -45,21 +45,31 @@ signupForm.addEventListener("submit", async function (e) {
     }
 
     const pendingEmail = data.email || email;
-    localStorage.setItem("lectorioPendingVerificationEmail", pendingEmail);
 
-    if (data.verificationCodeExpires) {
-      localStorage.setItem(
-        "lectorioVerificationExpiresAt",
-        data.verificationCodeExpires
-      );
+    if (data.requiresVerification) {
+      localStorage.setItem("lectorioPendingVerificationEmail", pendingEmail);
+
+      if (data.verificationCodeExpires) {
+        localStorage.setItem(
+          "lectorioVerificationExpiresAt",
+          data.verificationCodeExpires
+        );
+      }
+    } else {
+      // TODO: Re-enable email verification when sender domain is verified.
+      localStorage.removeItem("lectorioPendingVerificationEmail");
+      localStorage.removeItem("lectorioVerificationExpiresAt");
     }
 
-    message.textContent = "Account created. Check your email for the code.";
+    message.textContent = data.requiresVerification
+      ? "Account created. Check your email for the code."
+      : "Account created successfully!";
     message.className = "text-sm text-center font-medium text-green-600";
 
     setTimeout(() => {
-      window.location.href =
-        "verify-email.html?email=" + encodeURIComponent(pendingEmail);
+      window.location.href = data.requiresVerification
+        ? "verify-email.html?email=" + encodeURIComponent(pendingEmail)
+        : "login.html";
     }, 1200);
 
   } catch (error) {
