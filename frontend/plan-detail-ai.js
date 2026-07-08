@@ -154,13 +154,6 @@ function renderPlanDays(container, plan, days, completedDays, options) {
       const topics = Array.isArray(studyDay.topics)
         ? studyDay.topics
         : [];
-      const tasks = Array.isArray(studyDay.tasks)
-        ? studyDay.tasks
-        : [];
-      const quiz = Array.isArray(studyDay.quiz)
-        ? studyDay.quiz
-        : [];
-
       const status = completed
         ? `<span class="bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">Completed</span>`
         : studyDay.isRevisionDay
@@ -219,16 +212,6 @@ function renderPlanDays(container, plan, days, completedDays, options) {
               `).join("")}
             </div>
           ` : ""}
-
-          <h4 class="mt-5 font-semibold text-slate-900">Tasks</h4>
-          <ul class="mt-2 space-y-2 text-sm text-slate-600">
-            ${tasks.map(task => `<li>- ${escapeHtml(task)}</li>`).join("")}
-          </ul>
-
-          <h4 class="mt-5 font-semibold text-slate-900">Quick Quiz</h4>
-          <ol class="mt-2 space-y-2 text-sm text-slate-600 list-decimal list-inside">
-            ${quiz.map(question => `<li>${escapeHtml(question)}</li>`).join("")}
-          </ol>
 
           ${renderVideoRecommendations(
             studyDay,
